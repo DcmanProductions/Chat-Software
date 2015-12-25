@@ -26,7 +26,7 @@ public class TextTransfer {
         TextReader();
 
         TextWriter(FileName, fileContent);
-
+ 
         
     }
     

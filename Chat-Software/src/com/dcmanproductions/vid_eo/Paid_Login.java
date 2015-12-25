@@ -68,7 +68,7 @@ public class Paid_Login extends JFrame implements ActionListener {
         txtName.requestFocus(true);
         txtName.addKeyListener(new KeyListener(){
 
-            @Override
+            @Override 
             public void keyTyped(KeyEvent e) {
             }
 
