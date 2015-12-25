@@ -3,31 +3,26 @@
  */
 package com.dcmanproductions.vid_eo;
 
-import com.dcmanproductions.vid_eo.ClientWindow;
-import com.dcmanproductions.vid_eo.Updater.Updater;
-import com.dcmanproductions.vid_eo.server.ServerWindow;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-public class Paid_Login
-extends JFrame
-implements ActionListener {
+import com.dcmanproductions.vid_eo.TransferInfo.TextTransfer;
+import com.dcmanproductions.vid_eo.Updater.Updater;
+
+public class Paid_Login extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1;
     private String title = "Vid-Eo | Login";
     private String Name;
@@ -87,6 +82,18 @@ implements ActionListener {
                     String name = Paid_Login.txtName.getText();
                     int port = Integer.parseInt(Paid_Login.txtPort.getText());
                     String ip = Paid_Login.txtIpAddress.getText();
+                    
+        			try {
+        				TextTransfer.TextWriter(name+"'s Server", name + "\n" + Paid_Login.txtPort.getText() + "\n" + ip);
+        				TextTransfer.writer.println(name);
+        				TextTransfer.writer.println(ip);
+        				TextTransfer.writer.println(Paid_Login.txtPort.getText());
+        				TextTransfer.writer.close();					} catch (IOException e1) {
+						System.out.println("Having Trouble creating files in KeyPressed Method");
+						e1.printStackTrace();
+					}
+            		
+                    
                     Paid_Login.this.login(name, ip, port);
                 }
             }
@@ -121,6 +128,17 @@ implements ActionListener {
                     String name = Paid_Login.txtName.getText();
                     int port = Integer.parseInt(Paid_Login.txtPort.getText());
                     String ip = Paid_Login.txtIpAddress.getText();
+                    
+                    try {
+                    	TextTransfer.TextWriter(name+"'s Server", name + "\n" + Paid_Login.txtPort.getText() + "\n" + ip);
+        				TextTransfer.writer.println(name);
+        				TextTransfer.writer.println(ip);
+        				TextTransfer.writer.println(Paid_Login.txtPort.getText());
+        				TextTransfer.writer.close();					} catch (IOException e1) {
+						System.out.println("Having Trouble creating files in KeyPressed Method");
+						e1.printStackTrace();
+					}
+                    
                     Paid_Login.this.login(name, ip, port);
                 }
             }
@@ -159,6 +177,19 @@ implements ActionListener {
             String name = txtName.getText();
             int port = Integer.parseInt(txtPort.getText());
             String ip = txtIpAddress.getText();
+            
+            try {
+				TextTransfer.TextWriter(name+"'s Server", name + "\n" + Paid_Login.txtPort.getText() + "\n" + ip);
+				TextTransfer.writer.println(name);
+				TextTransfer.writer.println(ip);
+				TextTransfer.writer.println(Paid_Login.txtPort.getText());
+				TextTransfer.writer.close();
+				
+			} catch (IOException e1) {
+				System.out.println("Having Trouble creating files in ActionPreformed Method");
+				e1.printStackTrace();
+			}
+            
             this.login(name, ip, port);
         }
         if (e.getSource().equals(this.createServer)) {
