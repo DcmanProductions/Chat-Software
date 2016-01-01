@@ -11,6 +11,7 @@ public class TextTransfer {
 	public static String FileName, fileContent;
 	public static File objFile;
 	public static PrintWriter writer;
+	public static BufferedReader reader;
 	
 	
     public static void main(String[] args){
@@ -30,25 +31,25 @@ public class TextTransfer {
         
     }
     
-    public void TextReader()throws IOException{
+    public static void TextReader()throws IOException{
         FileReader objFR = null;
 		try {
-			objFR = new FileReader(objFile);
+			objFR = new FileReader("MostRecentServer.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-        BufferedReader objBR=new BufferedReader(objFR);
+        BufferedReader reader=new BufferedReader(objFR);
         
         String strContent = fileContent;
-        while((strContent=objBR.readLine())!=null)
-            System.out.println(objBR.readLine());
+        while((strContent=reader.readLine())!=null)
+            System.out.println(reader.readLine());
 
-        objBR.close();
+        reader.close();
     }
     
     public static void TextWriter(String FileName, String fileContent) throws IOException{
     	
-    	writer = new PrintWriter(FileName+".txt", "UTF-8");
+    	writer = new PrintWriter("MostRecentServer.txt", "UTF-8");
     	
     }
     

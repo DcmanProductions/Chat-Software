@@ -3,25 +3,18 @@
  */
 package com.dcmanproductions.vid_eo;
 
-import com.dcmanproductions.vid_eo.Client;
-import com.dcmanproductions.vid_eo.CommandsList;
-import com.dcmanproductions.vid_eo.OnlineUsers;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.io.PrintStream;
 import java.util.Arrays;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -32,11 +25,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.Caret;
 import javax.swing.text.DefaultCaret;
-import javax.swing.text.Document;
 
 public class ClientWindow
 extends JFrame
@@ -59,8 +49,8 @@ implements Runnable {
     private JMenuItem mntmVideo;
     private OnlineUsers users;
 
-    public ClientWindow(String name, String address, int port) {
-        this.setTitle("Vid-Eo");
+    public ClientWindow(String name, String address, int port, String serverName) {
+        this.setTitle("Vid-Eo | "+ serverName + "'s Server");
         this.client = new Client(name, address, port);
         boolean connect = this.client.openConnection(address);
         if (!connect) {
