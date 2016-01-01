@@ -27,8 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class Download
-  extends JFrame
+public class Download extends JFrame
 {
   private Thread worker;
   private final String root = "Vid-Eo/";
@@ -117,7 +116,7 @@ public class Download
   
   private void launch()
   {
-    String[] run = { "java", "-jar", "Vid-Eo_Both.jar" };
+    String[] run = { "java", "-jar", "Vid-Eo.jar" };
     try
     {
       Runtime.getRuntime().exec(run);
