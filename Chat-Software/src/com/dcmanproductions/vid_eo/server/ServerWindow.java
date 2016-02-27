@@ -23,15 +23,13 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-public class ServerWindow
-extends JFrame
-implements ActionListener {
+public class ServerWindow extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1;
     public JButton start;
     Dimension size;
     private JPanel content;
     public JTextField txtPort;
-
+    
     public ServerWindow() {
         this.setTitle("Vid-Eo | Server");
         this.size = new Dimension(220, 204);

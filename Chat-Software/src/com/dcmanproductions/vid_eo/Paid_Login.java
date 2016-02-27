@@ -10,9 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.dcmanproductions.vid_eo.TransferInfo.TextTransfer;
-import com.dcmanproductions.vid_eo.Updater.Updater;
+import com.dcmanproductions.vid_eo.Updater.Download;
 
 public class Paid_Login extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1;
@@ -47,11 +46,6 @@ public class Paid_Login extends JFrame implements ActionListener {
     }
 
     public Paid_Login() {
-    	try {
-			readTxtFromFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
         this.setTitle(this.title);
         this.setSize(this.size);
         this.setVisible(true);
@@ -67,31 +61,6 @@ public class Paid_Login extends JFrame implements ActionListener {
         this.init();
     }
     
-    public void readTxtFromFile() throws IOException{
-    	 BufferedReader br = TextTransfer.reader;
-    	    String line;
-    	    while ((line = br.readLine()) != null) {
-    	        if (line.trim().startsWith("start:")) {
-
-    	            line = line.replace("start:", "");
-    	            line = line.trim();
-    	            if (line.contains(",")){
-    	                String[] contractorName = line.split(",");
-    	                this.txtServerName.setText(contractorName[0].trim());
-    	                this.txtName.setText(contractorName[1].trim());
-    	                this.txtIpAddress.setText(contractorName[2].trim());
-    	                this.txtPort.setText(contractorName[3].trim());
-    	                String uname = contractorName[1].trim();
-    	                String ip = contractorName[2].trim();
-    	                String port = contractorName[3].trim();
-    	                // use the last name and first name as you wish here.
-    	            } else {
-    	                // line doesn't contain a first and last name for contractor.  invalid data.
-    	                continue;
-    	            }
-    	        }
-    	    }    
-    }
 
     private void init() {
         this.lblName = new JLabel("Please Enter a Username");
@@ -120,17 +89,19 @@ public class Paid_Login extends JFrame implements ActionListener {
                     String ip = Paid_Login.txtIpAddress.getText();
                     String serverName = Paid_Login.txtServerName.getText();
                     
-                    try {
-                    	TextTransfer.TextWriter(serverName+"'s Server", name + "\n" + Paid_Login.txtPort.getText() + "\n" + ip);
-        				TextTransfer.writer.println("start:"+serverName+",");
-        				TextTransfer.writer.println("start:"+name+",");
-        				TextTransfer.writer.println("start:"+ip+",");
-        				TextTransfer.writer.println("start:"+Paid_Login.txtPort.getText());
-        				TextTransfer.writer.close();					} catch (IOException e1) {
+//                    try {
+                    	WriteFile(name, ip, port, serverName);
+/*                    	TextTransfer.TextWriter(serverName+"'s Server", name + "\n" + Paid_Login.txtPort.getText() + "\n" + ip,ser);
+        				TextTransfer.writer.println(serverName+",");
+        				TextTransfer.writer.println(name+",");
+        				TextTransfer.writer.println(ip+",");
+        				TextTransfer.writer.println(Paid_Login.txtPort.getText());
+        				TextTransfer.writer.close();
+   				} catch (IOException e1) {
 						System.out.println("Having Trouble creating files in KeyPressed Method");
 						e1.printStackTrace();
 					}
-                    
+*/                    
                     Paid_Login.this.login(name, ip, port, serverName);
                 }
             }
@@ -142,6 +113,9 @@ public class Paid_Login extends JFrame implements ActionListener {
         txtServerName = new JTextField(this.Name);
         txtServerName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 210 + 50, 150, 25);
         txtServerName.requestFocus(true);
+        if(txtServerName.requestFocus(false)){
+        	readFile();
+        }
         txtServerName.addKeyListener(new KeyListener(){
 
             @Override 
@@ -160,16 +134,8 @@ public class Paid_Login extends JFrame implements ActionListener {
                     String ip = Paid_Login.txtIpAddress.getText();
                     String serverName = Paid_Login.txtServerName.getText();
                     
-                    try {
-                    	TextTransfer.TextWriter(serverName+"'s Server", name + "\n" + Paid_Login.txtPort.getText() + "\n" + ip);
-        				TextTransfer.writer.println("start:"+serverName+",");
-        				TextTransfer.writer.println("start:"+name+",");
-        				TextTransfer.writer.println("start:"+ip+",");
-        				TextTransfer.writer.println("start:"+Paid_Login.txtPort.getText());
-        				TextTransfer.writer.close();					} catch (IOException e1) {
-						System.out.println("Having Trouble creating files in KeyPressed Method");
-						e1.printStackTrace();
-					}
+                	WriteFile(name,ip,port,serverName);
+                	
                     
                     Paid_Login.this.login(name, ip, port, serverName);
                 }
@@ -208,16 +174,7 @@ public class Paid_Login extends JFrame implements ActionListener {
                     String ip = Paid_Login.txtIpAddress.getText();
                     String serverName = Paid_Login.txtServerName.getText();
                     
-                    try {
-                    	TextTransfer.TextWriter(serverName+"'s Server", name + "\n" + Paid_Login.txtPort.getText() + "\n" + ip);
-        				TextTransfer.writer.println("start:"+serverName+",");
-        				TextTransfer.writer.println("start:"+name+",");
-        				TextTransfer.writer.println("start:"+ip+",");
-        				TextTransfer.writer.println("start:"+Paid_Login.txtPort.getText());
-        				TextTransfer.writer.close();					} catch (IOException e1) {
-						System.out.println("Having Trouble creating files in KeyPressed Method");
-						e1.printStackTrace();
-					}
+    				WriteFile(name,ip,port,serverName);
                     
                     Paid_Login.this.login(name, ip, port, serverName);
                 }
@@ -242,7 +199,13 @@ public class Paid_Login extends JFrame implements ActionListener {
         this.contentPane.add(this.createServer);
         this.update = new JButton("Force Update");
         this.update.setBounds(this.size.width / 2 - 150 + 70, this.size.height / 2 + 32 + 120, 150, 15);
-        this.update.addActionListener(new Updater());
+//        this.update.addActionListener(new Updater());
+        this.update.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new Download();
+			}});
         this.update.setForeground(Color.white);
         this.update.setBackground(Color.DARK_GRAY);
         this.update.setBorderPainted(false);
@@ -260,18 +223,7 @@ public class Paid_Login extends JFrame implements ActionListener {
             String ip = txtIpAddress.getText();
             String serverName = txtServerName.getText();
             
-            try {
-				TextTransfer.TextWriter(serverName+"'s Server", name + "\n" + Paid_Login.txtPort.getText() + "\n" + ip);
-				TextTransfer.writer.println("start:"+serverName+",");
-				TextTransfer.writer.println("start:"+name+",");
-				TextTransfer.writer.println("start:"+ip+",");
-				TextTransfer.writer.println("start:"+Paid_Login.txtPort.getText());
-				TextTransfer.writer.close();
-				
-			} catch (IOException e1) {
-				System.out.println("Having Trouble creating files in ActionPreformed Method");
-				e1.printStackTrace();
-			}
+				WriteFile(name,ip,port,serverName);
             
             this.login(name, ip, port, serverName);
         }
@@ -279,6 +231,29 @@ public class Paid_Login extends JFrame implements ActionListener {
             new com.dcmanproductions.vid_eo.server.ServerWindow();
         }
     }
+    
+    public static void WriteFile(String name, String ip, int port, String serverName){
+    	try {
+    		new File("/"+serverName+"/").createNewFile();
+			TextTransfer.TextWriter(serverName+"'s Server"+" server name.txt", serverName,serverName);
+			TextTransfer.TextWriter(serverName+"'s Server"+" name.txt", name,serverName);
+			TextTransfer.TextWriter(serverName+"'s Server"+" ip.txt", ip,serverName);
+			TextTransfer.TextWriter(serverName+"'s Server"+" port.txt", Paid_Login.txtPort.getText(),serverName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    public void readFile(){
+    	try {
+			TextTransfer.TextReader(this.txtServerName.getText() +"'s Server information.txt", this.txtServerName.getText());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    } 
+
 
     private void login(String name, String ip, int port, String serverName) {
         this.dispose();
