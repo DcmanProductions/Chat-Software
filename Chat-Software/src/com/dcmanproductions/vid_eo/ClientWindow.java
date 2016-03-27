@@ -46,7 +46,7 @@ implements Runnable {
     private JMenuItem mntmOnlineUsers;
     private JMenuItem mntmExit;
     private JMenuItem mntmCommands;
-    private JMenuItem mntmVideo;
+//    private JMenuItem mntmVideo;
     private OnlineUsers users;
 
     public ClientWindow(String name, String address, int port, String serverName) {
@@ -225,16 +225,20 @@ implements Runnable {
                         String[] u = message.split("/u/|/n/|/e/");
                         ClientWindow.this.users.update(Arrays.copyOfRange(u, 1, u.length - 1));
                     }
+                    
                     ClientWindow.this.messageGLOBAL = message;
-                    if (message.contains("/help")) {
-                        ClientWindow.this.console("----Heres a List of Commands---- \n /quit -- to Quit the server and return to login \n/users -- to find out what users are online");
-                    }
-                    if (message.contains("/quit")) {
-                        ClientWindow.this.send("Server has been shutdown", true);
-                        System.exit(0);
-                    }
-                    if (message.contains("/users")) {
-                        ClientWindow.this.users.setVisible(true);
+                    
+                    if(Paid_Login.isAdmin){
+	                    if (message.contains("/help")) {
+	                        ClientWindow.this.console("----Heres a List of Commands---- \n /quit -- to Quit the server and return to login \n/users -- to find out what users are online");
+	                    }
+	                    if (message.contains("/quit")) {
+	                        ClientWindow.this.send("Server has been shutdown", true);
+	                        System.exit(0);
+	                    }
+	                    if (message.contains("/users")) {
+	                        ClientWindow.this.users.setVisible(true);
+	                    }
                     }
                     
                 }

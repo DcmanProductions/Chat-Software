@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -40,6 +41,8 @@ public class Paid_Login extends JFrame implements ActionListener {
     private JButton createServer;
     private JButton update;
     private JPanel contentPane;
+    public static JCheckBox cbAdmin;
+    public static boolean isAdmin;
 
     public static void main(String[] args) {
         new com.dcmanproductions.vid_eo.Paid_Login();
@@ -116,6 +119,9 @@ public class Paid_Login extends JFrame implements ActionListener {
         if(txtServerName.requestFocus(false)){
         	readFile();
         }
+        
+        
+        
         txtServerName.addKeyListener(new KeyListener(){
 
             @Override 
@@ -180,6 +186,7 @@ public class Paid_Login extends JFrame implements ActionListener {
                 }
             }
         });
+        
         this.contentPane.add(txtPort);
         this.login = new JButton("Login");
         this.login.setBounds(this.size.width / 2 - 150 + 12, this.size.height / 2 + 90 + 32, 100, 15);
@@ -198,7 +205,26 @@ public class Paid_Login extends JFrame implements ActionListener {
         this.createServer.setCursor(new Cursor(12));
         this.contentPane.add(this.createServer);
         this.update = new JButton("Force Update");
-        this.update.setBounds(this.size.width / 2 - 150 + 70, this.size.height / 2 + 32 + 120, 150, 15);
+        this.update.setBounds(this.size.width / 2 - 150 + 140, this.size.height / 2 + 32 + 120, 150, 15);
+        
+      //Adds Admin commands
+        if(this.txtIpAddress.getText() == "localhost")
+        	this.isAdmin = true;
+        else
+        	this.isAdmin = false;
+        
+        cbAdmin = new JCheckBox("Are You The ADMINISTRATOR");
+        cbAdmin.setBounds(this.size.width / 2 - 150 + 20, this.size.height / 2 + 32 + 145, 250, 15);
+        cbAdmin.setBackground(Color.DARK_GRAY);
+        cbAdmin.setForeground(Color.WHITE);
+        cbAdmin.setEnabled(false);
+        this.contentPane.add(cbAdmin);
+        if(isAdmin){
+        	cbAdmin.setSelected(true);
+        }else{
+        	cbAdmin.setSelected(false);
+        }
+        
 //        this.update.addActionListener(new Updater());
         this.update.addActionListener(new ActionListener(){
 
@@ -213,7 +239,7 @@ public class Paid_Login extends JFrame implements ActionListener {
         
         this.contentPane.add(this.update);
         this.update(this.getGraphics());
-    }
+        }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -233,15 +259,15 @@ public class Paid_Login extends JFrame implements ActionListener {
     }
     
     public static void WriteFile(String name, String ip, int port, String serverName){
-    	try {
-    		new File("/"+serverName+"/").createNewFile();
-			TextTransfer.TextWriter(serverName+"'s Server"+" server name.txt", serverName,serverName);
-			TextTransfer.TextWriter(serverName+"'s Server"+" name.txt", name,serverName);
-			TextTransfer.TextWriter(serverName+"'s Server"+" ip.txt", ip,serverName);
-			TextTransfer.TextWriter(serverName+"'s Server"+" port.txt", Paid_Login.txtPort.getText(),serverName);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//    	try {
+//    		new File("/"+serverName+"/").createNewFile();
+//			TextTransfer.TextWriter(serverName+"'s Server"+" server name.txt", serverName,serverName);
+//			TextTransfer.TextWriter(serverName+"'s Server"+" name.txt", name,serverName);
+//			TextTransfer.TextWriter(serverName+"'s Server"+" ip.txt", ip,serverName);
+//			TextTransfer.TextWriter(serverName+"'s Server"+" port.txt", Paid_Login.txtPort.getText(),serverName);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
     }
     
     public void readFile(){

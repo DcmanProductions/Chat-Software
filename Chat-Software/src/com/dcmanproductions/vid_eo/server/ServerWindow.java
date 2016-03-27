@@ -62,6 +62,8 @@ public class ServerWindow extends JFrame implements ActionListener {
                 if (e.getKeyCode() == 10) {
                     ServerWindow.this.dispose();
                     Paid_Login.txtIpAddress.setText("localhost");
+                    Paid_Login.isAdmin = true;
+                    Paid_Login.cbAdmin.setSelected(true);;
                     Paid_Login.txtPort.setText(ServerWindow.this.txtPort.getText());
                     new com.dcmanproductions.vid_eo.server.ServerMain(Integer.parseInt(ServerWindow.this.txtPort.getText()));
                     ServerWindow.this.dispose();
