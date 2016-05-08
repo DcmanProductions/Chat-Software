@@ -1,8 +1,8 @@
 package com.dcmanproductions.vid_eo.TransferInfo;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,20 +37,46 @@ public class TextTransfer {
     	
     	FileReader file = new FileReader(FileLocation+FileName);
     	BufferedReader reader = new BufferedReader(file);
+    	BufferedInputStream inStream = new BufferedInputStream(System.in);
     	
-    	String text = "";
-    	String line = reader.readLine();
-    	while(line != null){
-    		text += line;
-    		line = reader.readLine();
+    	Scanner scan = new Scanner(inStream);
+    	String info = scan.nextLine();
+    	
+    	while(info != null){
+    		if(info.startsWith("ip:")){
+    			
+    		}
+    		if(info.startsWith("port:")){
+    			
+    		}
+    		if(info.startsWith("name:")){
+    			
+    		}
     	}
     	
-    	System.out.println(text);
+//    	String text = "";
+//    	String line = reader.readLine();
+//    	while(line != null){
+//    		text += line;
+//    		line = reader.readLine();
+//    	}
+//    	
+//    	System.out.println(text);
     	
     }
     
     public static void TextWriter(String FileName, String fileContent, String FolderName) throws IOException{
-    	writer = new PrintWriter(FileName, "UTF-8");
+    	File f = new File("/Vid-Eo_ServerFiles/");
+    	try{
+    	    if(f.mkdir()) { 
+    	        System.out.println("Directory Created in "+f.getAbsolutePath());
+    	    } else {
+    	        System.out.println("Directory is not created");
+    	    }
+    	} catch(Exception e){
+    	    e.printStackTrace();
+    	}
+    	writer = new PrintWriter("C:/Vid-Eo_ServerFiles/"+FileName, "UTF-8");
     	writer.println(fileContent);
     	writer.close();
     	

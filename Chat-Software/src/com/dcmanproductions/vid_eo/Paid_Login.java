@@ -259,15 +259,17 @@ public class Paid_Login extends JFrame implements ActionListener {
     }
     
     public static void WriteFile(String name, String ip, int port, String serverName){
-//    	try {
+    	try {
+    		TextTransfer.TextWriter("Server_"+serverName+".txt", "ip:"+ip+"\n"+"port:"+port+"\n"+"name"+name, serverName);
+    		
 //    		new File("/"+serverName+"/").createNewFile();
 //			TextTransfer.TextWriter(serverName+"'s Server"+" server name.txt", serverName,serverName);
 //			TextTransfer.TextWriter(serverName+"'s Server"+" name.txt", name,serverName);
 //			TextTransfer.TextWriter(serverName+"'s Server"+" ip.txt", ip,serverName);
 //			TextTransfer.TextWriter(serverName+"'s Server"+" port.txt", Paid_Login.txtPort.getText(),serverName);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     public void readFile(){
