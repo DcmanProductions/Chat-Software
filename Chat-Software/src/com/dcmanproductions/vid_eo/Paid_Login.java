@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0_110.
- */
 package com.dcmanproductions.vid_eo;
 
 import java.awt.Color;
@@ -17,7 +14,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -40,10 +40,16 @@ public class Paid_Login extends JFrame implements ActionListener {
     private JButton login;
     private JButton createServer;
     private JButton update;
+    private JButton mapper;
     private JPanel contentPane;
+    
     public static JCheckBox cbAdmin;
     public static boolean isAdmin;
-
+    
+    //Setting up Menu For Server Names...
+	public JMenuBar Menu;
+	
+	
     public static void main(String[] args) {
         new com.dcmanproductions.vid_eo.Paid_Login();
     }
@@ -113,9 +119,16 @@ public class Paid_Login extends JFrame implements ActionListener {
         this.lblServerName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 280 + 50, 550, 100);
         this.lblServerName.setForeground(Color.white);
         this.contentPane.add(this.lblServerName);
+        
         txtServerName = new JTextField(this.Name);
         txtServerName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 210 + 50, 150, 25);
         txtServerName.requestFocus(true);
+        
+        this.Menu = new JMenuBar();
+        this.setJMenuBar(Menu);
+        
+        
+        
         if(txtServerName.requestFocus(false)){
         	readFile();
         }
@@ -196,6 +209,7 @@ public class Paid_Login extends JFrame implements ActionListener {
         this.login.setBorderPainted(false);
         this.login.setCursor(new Cursor(12));
         this.contentPane.add(this.login);
+        
         this.createServer = new JButton("Create a Server");
         this.createServer.setBounds(this.size.width / 2 - 150 + 120, this.size.height / 2 + 90 + 32, 150, 15);
         this.createServer.addActionListener(this);
@@ -204,8 +218,25 @@ public class Paid_Login extends JFrame implements ActionListener {
         this.createServer.setBorderPainted(false);
         this.createServer.setCursor(new Cursor(12));
         this.contentPane.add(this.createServer);
-        this.update = new JButton("Force Update");
-        this.update.setBounds(this.size.width / 2 - 150 + 140, this.size.height / 2 + 32 + 120, 150, 15);
+        
+        this.mapper = new JButton("Make This Public?");
+        this.mapper.setBounds(this.size.width / 2 - 150 + 12, this.size.height / 2 + 90 + 60, 145, 15);
+        this.mapper.addActionListener(this);
+        this.mapper.setForeground(Color.white);
+        this.mapper.setBackground(Color.DARK_GRAY);
+        this.mapper.setBorderPainted(false);
+        this.mapper.setCursor(new Cursor(12));
+        this.contentPane.add(this.mapper);
+        
+        //Action Listener for the PortMapper Button
+        
+        mapper.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				startPortMapper();
+			}
+		});
         
       //Adds Admin commands
         if(this.txtIpAddress.getText() == "localhost")
@@ -226,7 +257,9 @@ public class Paid_Login extends JFrame implements ActionListener {
         }
         
 //        this.update.addActionListener(new Updater());
-        this.update.addActionListener(new ActionListener(){
+       this.update = new JButton("Force Update");
+       this.update.setBounds(this.size.width / 2 - 150 + 140, this.size.height / 2 + 32 + 120, 150, 15);
+       this.update.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -260,7 +293,7 @@ public class Paid_Login extends JFrame implements ActionListener {
     
     public static void WriteFile(String name, String ip, int port, String serverName){
     	try {
-    		TextTransfer.TextWriter("Server_"+serverName+".txt", "ip:"+ip+"\n"+"port:"+port+"\n"+"name"+name, serverName);
+    		TextTransfer.TextWriter("Server_"+serverName+".txt", "ip:"+ip+"\n"+"port:"+port+"\n"+"name:"+name, serverName);
     		
 //    		new File("/"+serverName+"/").createNewFile();
 //			TextTransfer.TextWriter(serverName+"'s Server"+" server name.txt", serverName,serverName);
@@ -281,6 +314,20 @@ public class Paid_Login extends JFrame implements ActionListener {
 		}
     	
     } 
+    private void startPortMapper()
+    {
+    	getClass();
+    	
+//      String[] run = { "java", "-jar", "portmapper-2.0.0-alpha3.jar" };
+//      try
+//      {
+//        Runtime.getRuntime().exec(run);
+//      } 
+//      catch (Exception ex)
+//      {
+//        ex.printStackTrace();
+//      }
+    }
 
 
     private void login(String name, String ip, int port, String serverName) {
