@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Time;
 import java.util.Arrays;
 
 import javax.swing.JButton;
@@ -25,6 +26,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
 
+@SuppressWarnings("all")
 public class ClientWindow extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1;
 	private JPanel contentPane;
@@ -52,6 +54,7 @@ public class ClientWindow extends JFrame implements Runnable {
 			System.err.println("Connection failed!");
 			this.console("Connection failed!");
 		}
+
 		this.createWindow();
 		this.console("Attempting a connection to " + address + ":" + port + ", user: " + name);
 		String connection = "/c/" + name + "/e/";

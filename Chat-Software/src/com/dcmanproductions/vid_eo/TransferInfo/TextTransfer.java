@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+@SuppressWarnings("all")
 public class TextTransfer {
 	public static String FileName, fileContent;
 	public static File objFile;
@@ -19,23 +20,9 @@ public class TextTransfer {
 	public static String rdIp;
 	public static String rdPort;
 	public static String rdName;
+	public static String rdServerName;
 
-	/*
-	 * public static void main(String[] args){ try { new TextTransfer(FileName,
-	 * fileContent); } catch (IOException e) { e.printStackTrace();
-	 * System.out.println("Something went wrong in The Text Transfer Class"); }
-	 * } public TextTransfer(String FileName, String fileContent) throws
-	 * IOException {
-	 * 
-	 * TextReader(FileName);
-	 * 
-	 * TextWriter(FileName, fileContent);
-	 * 
-	 * 
-	 * }
-	 */
-
-	public static void TextReader(String FileName, String FileLocation) throws IOException {
+	public static void TextReader(String FileName, String FileLocation, boolean isNonServerList) throws IOException {
 		System.out.println("Accessing Text Reader Method...");
 		System.out.println("Attempting To Read Designated File...");
 
@@ -47,47 +34,66 @@ public class TextTransfer {
 
 		System.out.println("Initializing Buffered Reader... \nInitializing Buffered Input Stream...");
 
-		// Scanner scan = new Scanner(inStream);
-		// String info = scan.nextLine();
+		if (!isNonServerList) {
+			try {
+				String text = "";
 
-		/*
-		 * while (info != null) { System.out.println("Info Print " + info); if
-		 * (info.startsWith("ip:")) { System.out.println("Server Ip is:" +
-		 * info.length()); } if (info.startsWith("port:")) {
-		 * 
-		 * } if (info.startsWith("name:")) {
-		 * 
-		 * } }
-		 */
-		try {
-			String text = "";
+				String line = reader.readLine();
+				while (line != null) {
 
-			String line = reader.readLine();
-			while (line != null) {
-				if (reader.toString().startsWith("ip:")) {
-					text = TextTransfer.rdIp;
+					if (line.startsWith("ip:")) {
+						TextTransfer.rdIp = line.substring(3);
+						System.out.println("IP Address is: " + TextTransfer.rdIp);
+					}
+					if (line.startsWith("name:")) {
+						TextTransfer.rdName = line.substring(5);
+						System.out.println("Username is: " + TextTransfer.rdName);
+					}
+					if (line.startsWith("port:")) {
+						TextTransfer.rdPort = line.substring(5);
+						System.out.println("Port # is: " + TextTransfer.rdPort);
+					}
+					if (line.startsWith("Server_Name:")) {
+						TextTransfer.rdServerName = line.substring(12);
+						System.out.println("Server Name is: " + TextTransfer.rdServerName);
+					}
+					// System.out.println(line);
+					text += line;
+					line = reader.readLine();
+
 				}
-				if (reader.toString().startsWith("port:")) {
-					text = TextTransfer.rdPort;
-				}
-				if (reader.toString().startsWith("name:")) {
-					text = TextTransfer.rdName;
-				}
-				System.out.println(line);
-				text += line;
-				line = reader.readLine();
+			} catch (Exception e) {
+				System.out.println(
+						"Had A Problem with the while loop in the TextReader Method\n Couldn't proccess line reader");
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			System.out.println(
-					"Had A Problem with the while loop in the TextReader Method\n  Couldn't proccess line reader");
-			e.printStackTrace();
+		}else{
+			try {
+				String text = "";
+
+				String line = reader.readLine();
+				while (line != null) {
+					
+					if (line.startsWith("name:")) {
+						TextTransfer.rdServerName = line.substring(5);
+						System.out.println("IP Address is: " + TextTransfer.rdIp);
+					}
+					text += line;
+					line = reader.readLine();
+
+				}
+			} catch (Exception e) {
+				System.out.println(
+						"Had A Problem with the while loop in the TextReader Method\n Couldn't proccess line reader");
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 	public static void TextWriter(String FileName, String fileContent, String FolderName) throws IOException {
 		System.out.println("Accessing Text Writer Method...");
-		File f = new File("/Vid-Eo_ServerFiles/");
+		File f = new File("/Vid-Eo_Server Files/");
 		try {
 			if (f.mkdir()) {
 				System.out.println("Directory Created in " + f.getAbsolutePath());
@@ -97,7 +103,7 @@ public class TextTransfer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		writer = new PrintWriter("C:/Vid-Eo_ServerFiles/" + FileName, "UTF-8");
+		writer = new PrintWriter("C://Vid-Eo_Server Files//" + FileName, "UTF-8");
 		writer.println(fileContent);
 		writer.close();
 

@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+@SuppressWarnings("all")
 public class Client {
 	private static final long serialVersionUID = 1;
 	private DatagramSocket socket;

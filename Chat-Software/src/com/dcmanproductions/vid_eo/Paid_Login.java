@@ -14,9 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -24,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import com.dcmanproductions.vid_eo.TransferInfo.TextTransfer;
 import com.dcmanproductions.vid_eo.Updater.Download;
 
+@SuppressWarnings("all")
 public class Paid_Login extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1;
 	private String title = "Vid-Eo | Login";
@@ -34,6 +32,7 @@ public class Paid_Login extends JFrame implements ActionListener {
 	private JLabel lblPort;
 	private JLabel lblServerName;
 	private JLabel lblCopyright;
+	private JLabel lblError;
 	public static JTextField txtName;
 	public static JTextField txtIpAddress;
 	public static JTextField txtPort;
@@ -43,25 +42,21 @@ public class Paid_Login extends JFrame implements ActionListener {
 	private JButton update;
 	private JButton mapper;
 	private JPanel contentPane;
-	
+
 	public static JCheckBox cbAdmin;
 	public static boolean isAdmin;
 
-	// Setting up Menu For Server Names...
-	public JMenuBar Menu;
-
-	public static void main(String[] args) {
-		new com.dcmanproductions.vid_eo.Paid_Login();
-	}
-
 	public Paid_Login() {
+
+		System.out.println("Starting Login Application...\nCreating GUI...");
+
 		this.setTitle(this.title);
 		this.setSize(this.size);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(3);
 		this.setResizable(false);
-		
+
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(this.contentPane);
@@ -72,8 +67,15 @@ public class Paid_Login extends JFrame implements ActionListener {
 	}
 
 	private void init() {
-
-		
+		// this.menuBar = new JMenuBar();
+		// this.setJMenuBar(this.menuBar);
+		// this.mnFile = new JMenu("File");
+		// this.menuBar.add(this.mnFile);
+		// this.menuBar = new JMenuBar();
+		//
+		// this.setJMenuBar(this.menuBar);
+		// this.mnFile = new JMenu("Servers");
+		// this.menuBar.add(this.mnFile);
 
 		this.lblName = new JLabel("Please Enter a Username");
 		this.lblName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 143 - 30, 550, 100);
@@ -128,12 +130,8 @@ public class Paid_Login extends JFrame implements ActionListener {
 		txtServerName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 160 - 30, 150, 25);
 		txtServerName.requestFocus(true);
 
-		this.Menu = new JMenuBar();
-		this.setJMenuBar(Menu);
-
-		if (txtServerName.requestFocus(false)) {
-			readFile();
-		}
+		// this.Menu = new JMenuBar();
+		// this.setJMenuBar(Menu);
 
 		txtServerName.addKeyListener(new KeyListener() {
 
@@ -304,10 +302,12 @@ public class Paid_Login extends JFrame implements ActionListener {
 
 		this.contentPane.add(this.update);
 
+		this.txtIpAddress.setText(ServerList.ip);
+		this.txtPort.setText(ServerList.port);
+		this.txtName.setText(ServerList.username);
+		this.txtServerName.setText(ServerList.serverName);
+		
 		this.update(this.getGraphics());
-
-		// Read File Initialization
-		readFile();
 	}
 
 	@Override
@@ -329,21 +329,15 @@ public class Paid_Login extends JFrame implements ActionListener {
 
 	public static void WriteFile(String name, String ip, int port, String serverName) {
 		try {
+			// Creating Server Info
 			TextTransfer.TextWriter("Server_" + serverName + ".txt",
 					"Server_Name:" + serverName + "\n" + "ip:" + ip + "\n" + "port:" + port + "\n" + "name:" + name,
 					serverName);
-			// Adding the Server list info
-			TextTransfer.TextWriter("Your Server List.txt", serverName, serverName);
+			// Creating Last Used
+			TextTransfer.TextWriter("Server_LastUsed.txt",
+					"Server_Name:" + serverName + "\n" + "ip:" + ip + "\n" + "port:" + port + "\n" + "name:" + name,
+					serverName);
 
-			// new File("/"+serverName+"/").createNewFile();
-			// TextTransfer.TextWriter(serverName+"'s Server"+" server
-			// name.txt", serverName,serverName);
-			// TextTransfer.TextWriter(serverName+"'s Server"+" name.txt",
-			// name,serverName);
-			// TextTransfer.TextWriter(serverName+"'s Server"+" ip.txt",
-			// ip,serverName);
-			// TextTransfer.TextWriter(serverName+"'s Server"+" port.txt",
-			// Paid_Login.txtPort.getText(),serverName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -351,7 +345,11 @@ public class Paid_Login extends JFrame implements ActionListener {
 
 	public void readFile() {
 		try {
-			TextTransfer.TextReader("//Server_Drew Chase.txt", "C://Vid-Eo_ServerFiles");
+			TextTransfer.TextReader("//Server_" + this.txtServerName.getText() + ".txt",
+					"C://Program Files//Vid-Eo_ServerFiles", false);
+			this.txtIpAddress.setText(TextTransfer.rdIp);
+			this.txtPort.setText(TextTransfer.rdPort);
+			this.txtName.setText(TextTransfer.rdName);
 		} catch (IOException e) {
 			System.out.println("Had an issue with The ReadFile Method");
 			e.printStackTrace();

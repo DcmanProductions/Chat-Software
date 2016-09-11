@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("all")
 public class CommandsList
 extends JFrame {
     private static final long serialVersionUID = 1;
