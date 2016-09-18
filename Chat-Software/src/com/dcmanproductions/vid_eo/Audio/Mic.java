@@ -71,14 +71,14 @@ public class Mic {
 			 * 
 			 */
 			{
-				final int Î» = 16;
-				ByteBuffer buffer = ByteBuffer.allocate(Î» * 2 * 8);
+				final int Î = 16;
+				ByteBuffer buffer = ByteBuffer.allocate(Î * 2 * 8);
 				for (int j = 0; j < 2; j++) {
-					for (double i = 0.0; i < Î»; i++) {
+					for (double i = 0.0; i < Î; i++) {
 						System.out.println(j + " " + i);
 						// once for each sample
-						buffer.putShort((short) (Math.sin(Math.PI * (Î» / i)) * Short.MAX_VALUE));
-						buffer.putShort((short) (Math.sin(Math.PI * (Î» / i)) * Short.MAX_VALUE));
+						buffer.putShort((short) (Math.sin(Math.PI * (Î / i)) * Short.MAX_VALUE));
+						buffer.putShort((short) (Math.sin(Math.PI * (Î / i)) * Short.MAX_VALUE));
 					}
 				}
 

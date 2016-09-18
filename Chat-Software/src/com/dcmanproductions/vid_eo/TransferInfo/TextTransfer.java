@@ -16,6 +16,8 @@ public class TextTransfer {
 	public static PrintWriter writer;
 	public static BufferedReader reader;
 	public static String serverName;
+	
+	public static String text;
 
 	public static String rdIp;
 	public static String rdPort;
@@ -69,15 +71,12 @@ public class TextTransfer {
 			}
 		}else{
 			try {
-				String text = "";
+				TextTransfer.text = "";
+				String text = TextTransfer.text;
 
 				String line = reader.readLine();
 				while (line != null) {
-					
-					if (line.startsWith("name:")) {
-						TextTransfer.rdServerName = line.substring(5);
-						System.out.println("IP Address is: " + TextTransfer.rdIp);
-					}
+					System.out.println("Line:"+line+" Text"+text);
 					text += line;
 					line = reader.readLine();
 

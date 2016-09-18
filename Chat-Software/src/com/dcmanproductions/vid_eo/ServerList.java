@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.dcmanproductions.vid_eo.TransferInfo.TextTransfer;
+import com.dcmanproductions.vid_eo.Updater.UpdateInfo;
+import com.dcmanproductions.vid_eo.Updater.Updater;
 
 @SuppressWarnings("all")
 public class ServerList extends JFrame implements ActionListener {
@@ -144,6 +146,14 @@ public class ServerList extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
+		try {
+			TextTransfer.TextReader("/currentVersion.txt/", "/", true);
+            if (Integer.parseInt(Updater.getLatestVersion()) > Integer.parseInt(TextTransfer.text)) {
+                new UpdateInfo(Updater.getWhatsNew());
+            }
+        } catch (Exception ex) {
+        	System.out.println("Had Issues with the Version Verification. ERROR: "+ex.getMessage());
+        }
 		new ServerList();
 	}
 
