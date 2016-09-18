@@ -43,8 +43,9 @@ public class ClientWindow extends JFrame implements Runnable {
 	private JMenuItem mntmOnlineUsers;
 	private JMenuItem mntmExit;
 	private JMenuItem mntmCommands;
-	// private JMenuItem mntmVideo;
+	private JMenuItem mntmBack;
 	private OnlineUsers users;
+	private boolean isSending = true;
 
 	public ClientWindow(String name, String address, int port, String serverName) {
 		this.setTitle("Vid-Eo | " + serverName + "'s Server");
@@ -54,7 +55,7 @@ public class ClientWindow extends JFrame implements Runnable {
 			System.err.println("Connection failed!");
 			this.console("Connection failed!");
 		}
-
+		isSending = true;
 		this.createWindow();
 		this.console("Attempting a connection to " + address + ":" + port + ", user: " + name);
 		String connection = "/c/" + name + "/e/";
@@ -97,6 +98,19 @@ public class ClientWindow extends JFrame implements Runnable {
 			}
 		});
 		this.mnFile.add(this.mntmCommands);
+
+		this.mntmBack = new JMenuItem("Back to Login");
+		this.mntmBack.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Paid_Login backLogin = new Paid_Login();
+				new com.dcmanproductions.vid_eo.Paid_Login();
+				// backLogin.setVisible(true);
+				ClientWindow.this.setVisible(false);
+			}
+		});
+		// this.mnFile.add(this.mntmBack);
 
 		this.mntmExit = new JMenuItem("Exit");
 		this.mntmExit.addActionListener(new ActionListener() {
@@ -190,15 +204,30 @@ public class ClientWindow extends JFrame implements Runnable {
 	}
 
 	private void send(String message, boolean text) {
-		if (message.equals("")) {
+		isSending = true;
+		if (isSending) {
+			if (message.startsWith("/")) {
+				isSending = false;
+			}
+			if (message.equals("")) {
+				return;
+			}
+
+			if (text) {
+				message = String.valueOf(this.client.getName()) + ": " + message;
+				message = "/m/" + message + "/e/";
+				this.txtMessage.setText("");
+			}
+			
+
+			this.client.send(message.getBytes());
+
+			if (!isSending)
+				runCommands(message);
+
+		} else {
 			return;
 		}
-		if (text) {
-			message = String.valueOf(this.client.getName()) + ": " + message;
-			message = "/m/" + message + "/e/";
-			this.txtMessage.setText("");
-		}
-		this.client.send(message.getBytes());
 	}
 
 	public void listen() {
@@ -227,20 +256,6 @@ public class ClientWindow extends JFrame implements Runnable {
 
 					ClientWindow.this.messageGLOBAL = message;
 
-					if (Paid_Login.isAdmin) {
-						if (message.contains("/help")) {
-							ClientWindow.this.console(
-									"----Heres a List of Commands---- \n /quit -- to Quit the server and return to login \n/users -- to find out what users are online");
-						}
-						if (message.contains("/quit")) {
-							ClientWindow.this.send("Server has been shutdown", true);
-							System.exit(0);
-						}
-						if (message.contains("/users")) {
-							ClientWindow.this.users.setVisible(true);
-						}
-					}
-
 				}
 			}
 		};
@@ -250,6 +265,19 @@ public class ClientWindow extends JFrame implements Runnable {
 	public void console(String message) {
 		this.history.append(String.valueOf(message) + "\n\r");
 		this.history.setCaretPosition(this.history.getDocument().getLength());
+	}
+
+	public void runCommands(String cmds) {
+		if (cmds.contains("h") || cmds.contains("help") || cmds.contains("?"))
+			ClientWindow.this
+					.console("----Heres a List of Commands---- " + "\n /quit -- to Quit the server and return to login "
+							+ "\n/users -- to find out what users are online");
+
+		if (cmds.contains("users") || cmds.contains("list") || cmds.contains("clients"))
+			ClientWindow.this.users.setVisible(true);
+
+		if (cmds.contains("stop") || cmds.contains("quit") || cmds.contains("exit"))
+			System.exit(0);
 	}
 
 	static /* synthetic */ void access$4(ClientWindow clientWindow, boolean bl) {

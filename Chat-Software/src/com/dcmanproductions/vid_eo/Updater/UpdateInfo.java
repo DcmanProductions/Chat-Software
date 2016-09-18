@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0_110.
- */
 package com.dcmanproductions.vid_eo.Updater;
 
 import java.awt.BorderLayout;
@@ -14,7 +11,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
+@SuppressWarnings("all")
 public class UpdateInfo
 extends JFrame {
     private JEditorPane infoPane;

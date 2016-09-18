@@ -1,15 +1,10 @@
-/*
- * Decompiled with CFR 0_110.
- */
 package com.dcmanproductions.vid_eo.Updater;
 
-import com.dcmanproductions.vid_eo.Updater.UpdateInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.net.URL;
-
+@SuppressWarnings("all")
 public class Updater
 implements ActionListener {
     private static final String versionURL = "";

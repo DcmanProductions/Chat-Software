@@ -33,15 +33,17 @@ public class Paid_Login extends JFrame implements ActionListener {
 	private JLabel lblServerName;
 	private JLabel lblCopyright;
 	private JLabel lblError;
-	public static JTextField txtName;
-	public static JTextField txtIpAddress;
-	public static JTextField txtPort;
-	public static JTextField txtServerName;
 	private JButton login;
 	private JButton createServer;
 	private JButton update;
 	private JButton mapper;
+	private JButton back;
 	private JPanel contentPane;
+
+	public static JTextField txtName;
+	public static JTextField txtIpAddress;
+	public static JTextField txtPort;
+	public static JTextField txtServerName;
 
 	public static JCheckBox cbAdmin;
 	public static boolean isAdmin;
@@ -50,40 +52,31 @@ public class Paid_Login extends JFrame implements ActionListener {
 
 		System.out.println("Starting Login Application...\nCreating GUI...");
 
-		this.setTitle(this.title);
-		this.setSize(this.size);
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(3);
-		this.setResizable(false);
+		setTitle(title);
+		setSize(size);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(3);
+		setResizable(false);
 
-		this.contentPane = new JPanel();
-		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		this.setContentPane(this.contentPane);
-		this.contentPane.setLayout(null);
-		this.contentPane.setBackground(Color.DARK_GRAY);
-		this.update(this.getGraphics());
-		this.init();
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.setBackground(Color.DARK_GRAY);
+		update(getGraphics());
+		init();
 	}
 
 	private void init() {
-		// this.menuBar = new JMenuBar();
-		// this.setJMenuBar(this.menuBar);
-		// this.mnFile = new JMenu("File");
-		// this.menuBar.add(this.mnFile);
-		// this.menuBar = new JMenuBar();
-		//
-		// this.setJMenuBar(this.menuBar);
-		// this.mnFile = new JMenu("Servers");
-		// this.menuBar.add(this.mnFile);
 
-		this.lblName = new JLabel("Please Enter a Username");
-		this.lblName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 143 - 30, 550, 100);
-		this.lblName.setForeground(Color.white);
-		this.contentPane.add(this.lblName);
-		txtName = new JTextField(this.Name);
+		lblName = new JLabel("Please Enter a Username");
+		lblName.setBounds(size.width / 2 - 150 + 65, size.height / 2 - 143 - 30, 550, 100);
+		lblName.setForeground(Color.white);
+		contentPane.add(lblName);
+		txtName = new JTextField(Name);
 
-		txtName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 73 - 30, 150, 25);
+		txtName.setBounds(size.width / 2 - 150 + 65, size.height / 2 - 73 - 30, 150, 25);
 		txtName.requestFocus(true);
 		txtName.addKeyListener(new KeyListener() {
 
@@ -103,35 +96,20 @@ public class Paid_Login extends JFrame implements ActionListener {
 					String ip = Paid_Login.txtIpAddress.getText();
 					String serverName = Paid_Login.txtServerName.getText();
 
-					// try {
 					WriteFile(name, ip, port, serverName);
-					/*
-					 * TextTransfer.TextWriter(serverName+"'s Server", name +
-					 * "\n" + Paid_Login.txtPort.getText() + "\n" + ip,ser);
-					 * TextTransfer.writer.println(serverName+",");
-					 * TextTransfer.writer.println(name+",");
-					 * TextTransfer.writer.println(ip+",");
-					 * TextTransfer.writer.println(Paid_Login.txtPort.getText())
-					 * ; TextTransfer.writer.close(); } catch (IOException e1) {
-					 * System.out.println(
-					 * "Having Trouble creating files in KeyPressed Method");
-					 * e1.printStackTrace(); }
-					 */
 					Paid_Login.this.login(name, ip, port, serverName);
 				}
 			}
 		});
-		this.lblServerName = new JLabel("Please Enter a Server Name");
-		this.lblServerName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 230 - 30, 550, 100);
-		this.lblServerName.setForeground(Color.white);
-		this.contentPane.add(this.lblServerName);
+		lblServerName = new JLabel("Please Enter a Server Name");
+		lblServerName.setBounds(size.width / 2 - 150 + 65, size.height / 2 - 230 - 30, 550, 100);
+		lblServerName.setForeground(Color.white);
+		contentPane.add(lblServerName);
 
-		txtServerName = new JTextField(this.Name);
-		txtServerName.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 160 - 30, 150, 25);
+		txtServerName = new JTextField(Name);
+		txtServerName.setBounds(size.width / 2 - 150 + 65, size.height / 2 - 160 - 30, 150, 25);
 		txtServerName.requestFocus(true);
 
-		// this.Menu = new JMenuBar();
-		// this.setJMenuBar(Menu);
 
 		txtServerName.addKeyListener(new KeyListener() {
 
@@ -158,20 +136,20 @@ public class Paid_Login extends JFrame implements ActionListener {
 			}
 		});
 
-		this.lblCopyright = new JLabel("A Drew Chase Project!");
-		this.lblCopyright.setBounds(this.size.width / 2 - 150 + 50, this.size.height / 2 + 32 + 145, 250, 15);
-		this.lblCopyright.setForeground(Color.gray);
-		this.lblCopyright.setFont(new Font("Verdana", 0, 15));
-		this.contentPane.add(this.lblCopyright);
+		lblCopyright = new JLabel("A Drew Chase Project!");
+		lblCopyright.setBounds(size.width / 2 - 150 + 50, size.height / 2 + 32 + 145, 250, 15);
+		lblCopyright.setForeground(Color.gray);
+		lblCopyright.setFont(new Font("Verdana", 0, 15));
+		contentPane.add(lblCopyright);
 
-		this.contentPane.add(txtServerName);
-		this.contentPane.add(txtName);
-		this.lblIpAddress = new JLabel("Enter Servers IP Address");
-		this.lblIpAddress.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 - 63 - 30, 550, 100);
-		this.lblIpAddress.setForeground(Color.white);
-		this.contentPane.add(this.lblIpAddress);
+		contentPane.add(txtServerName);
+		contentPane.add(txtName);
+		lblIpAddress = new JLabel("Enter Servers IP Address");
+		lblIpAddress.setBounds(size.width / 2 - 150 + 65, size.height / 2 - 63 - 30, 550, 100);
+		lblIpAddress.setForeground(Color.white);
+		contentPane.add(lblIpAddress);
 		txtIpAddress = new JTextField();
-		txtIpAddress.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 + 7 - 30, 150, 25);
+		txtIpAddress.setBounds(size.width / 2 - 150 + 65, size.height / 2 + 7 - 30, 150, 25);
 		txtIpAddress.addKeyListener(new KeyListener() {
 
 			@Override
@@ -197,13 +175,13 @@ public class Paid_Login extends JFrame implements ActionListener {
 			}
 		});
 
-		this.contentPane.add(txtIpAddress);
-		this.lblPort = new JLabel("Enter Servers Port #");
-		this.lblPort.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 + 7 - 30, 550, 100);
-		this.lblPort.setForeground(Color.white);
-		this.contentPane.add(this.lblPort);
+		contentPane.add(txtIpAddress);
+		lblPort = new JLabel("Enter Servers Port #");
+		lblPort.setBounds(size.width / 2 - 150 + 65, size.height / 2 + 7 - 30, 550, 100);
+		lblPort.setForeground(Color.white);
+		contentPane.add(lblPort);
 		txtPort = new JTextField();
-		txtPort.setBounds(this.size.width / 2 - 150 + 65, this.size.height / 2 + 77 - 30, 150, 25);
+		txtPort.setBounds(size.width / 2 - 150 + 65, size.height / 2 + 77 - 30, 150, 25);
 		txtPort.addKeyListener(new KeyListener() {
 
 			@Override
@@ -229,33 +207,33 @@ public class Paid_Login extends JFrame implements ActionListener {
 			}
 		});
 
-		this.contentPane.add(txtPort);
-		this.login = new JButton("Login");
-		this.login.setBounds(this.size.width / 2 - 150 + 12, this.size.height / 2 + 122 - 30, 100, 15);
-		this.login.addActionListener(this);
-		this.login.setForeground(Color.white);
-		this.login.setBackground(Color.DARK_GRAY);
-		this.login.setBorderPainted(false);
-		this.login.setCursor(new Cursor(12));
-		this.contentPane.add(this.login);
+		contentPane.add(txtPort);
+		login = new JButton("Login");
+		login.setBounds(size.width / 2 - 150 + 12, size.height / 2 + 122 - 30, 100, 15);
+		login.addActionListener(this);
+		login.setForeground(Color.white);
+		login.setBackground(Color.DARK_GRAY);
+		login.setBorderPainted(false);
+		login.setCursor(new Cursor(12));
+		contentPane.add(login);
 
-		this.createServer = new JButton("Create a Server");
-		this.createServer.setBounds(this.size.width / 2 - 150 + 120, this.size.height / 2 + 90 + 32 - 30, 150, 15);
-		this.createServer.addActionListener(this);
-		this.createServer.setForeground(Color.white);
-		this.createServer.setBackground(Color.DARK_GRAY);
-		this.createServer.setBorderPainted(false);
-		this.createServer.setCursor(new Cursor(12));
-		this.contentPane.add(this.createServer);
+		createServer = new JButton("Create a Server");
+		createServer.setBounds(size.width / 2 - 150 + 120, size.height / 2 + 90 + 32 - 30, 150, 15);
+		createServer.addActionListener(this);
+		createServer.setForeground(Color.white);
+		createServer.setBackground(Color.DARK_GRAY);
+		createServer.setBorderPainted(false);
+		createServer.setCursor(new Cursor(12));
+		contentPane.add(createServer);
 
-		this.mapper = new JButton("Make This Public?");
-		this.mapper.setBounds(this.size.width / 2 - 150 + 12, this.size.height / 2 + 90 + 60 - 30, 145, 15);
-		this.mapper.addActionListener(this);
-		this.mapper.setForeground(Color.white);
-		this.mapper.setBackground(Color.DARK_GRAY);
-		this.mapper.setBorderPainted(false);
-		this.mapper.setCursor(new Cursor(12));
-		this.contentPane.add(this.mapper);
+		mapper = new JButton("Make This Public?");
+		mapper.setBounds(size.width / 2 - 150 + 12, size.height / 2 + 90 + 60 - 30, 145, 15);
+		mapper.addActionListener(this);
+		mapper.setForeground(Color.white);
+		mapper.setBackground(Color.DARK_GRAY);
+		mapper.setBorderPainted(false);
+		mapper.setCursor(new Cursor(12));
+		contentPane.add(mapper);
 
 		// Action Listener for the PortMapper Button
 
@@ -268,51 +246,70 @@ public class Paid_Login extends JFrame implements ActionListener {
 		});
 
 		// Adds Admin commands
-		if (this.txtIpAddress.getText() == "localhost")
-			this.isAdmin = true;
+		if (txtIpAddress.getText() == "localhost")
+			isAdmin = true;
 		else
-			this.isAdmin = false;
+			isAdmin = false;
 
 		cbAdmin = new JCheckBox("Are You The ADMINISTRATOR");
-		cbAdmin.setBounds(this.size.width / 2 - 150 + 20, this.size.height / 2 + 32 + 145 - 30, 250, 15);
+		cbAdmin.setBounds(size.width / 2 - 150 + 20, size.height / 2 + 32 + 145 - 30, 250, 15);
 		cbAdmin.setBackground(Color.DARK_GRAY);
 		cbAdmin.setForeground(Color.WHITE);
 		cbAdmin.setEnabled(false);
-		this.contentPane.add(cbAdmin);
+		contentPane.add(cbAdmin);
 		if (isAdmin) {
 			cbAdmin.setSelected(true);
 		} else {
 			cbAdmin.setSelected(false);
 		}
 
-		// this.update.addActionListener(new Updater());
-		this.update = new JButton("Force Update");
-		this.update.setBounds(this.size.width / 2 - 150 + 140, this.size.height / 2 + 32 + 120 - 30, 150, 15);
-		this.update.addActionListener(new ActionListener() {
+		// update.addActionListener(new Updater());
+		update = new JButton("Force Update");
+		update.setBounds(size.width / 2 - 150 + 140, size.height / 2 + 32 + 120 - 30, 150, 15);
+		update.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new Download();
 			}
 		});
-		this.update.setForeground(Color.white);
-		this.update.setBackground(Color.DARK_GRAY);
-		this.update.setBorderPainted(false);
-		this.update.setCursor(new Cursor(12));
+		update.setForeground(Color.white);
+		update.setBackground(Color.DARK_GRAY);
+		update.setBorderPainted(false);
+		update.setCursor(new Cursor(12));
 
-		this.contentPane.add(this.update);
-
-		this.txtIpAddress.setText(ServerList.ip);
-		this.txtPort.setText(ServerList.port);
-		this.txtName.setText(ServerList.username);
-		this.txtServerName.setText(ServerList.serverName);
+		contentPane.add(update);
 		
-		this.update(this.getGraphics());
+		back = new JButton("Back");
+		back.setBounds(size.width / 2 - 150, size.height / 2 - 230 - 30, 65, 75);
+		back.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Paid_Login.this.setVisible(false);
+				ServerList sl = new ServerList();
+				sl.setVisible(true);
+			}
+		});
+		back.setForeground(Color.white);
+		back.setBackground(Color.DARK_GRAY);
+		back.setBorderPainted(false);
+		back.setCursor(new Cursor(12));
+
+		contentPane.add(back);
+		
+
+		txtIpAddress.setText(ServerList.ip);
+		txtPort.setText(ServerList.port);
+		txtName.setText(ServerList.username);
+		txtServerName.setText(ServerList.serverName);
+
+		update(getGraphics());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(this.login)) {
+		if (e.getSource().equals(login)) {
 			String name = txtName.getText();
 			int port = Integer.parseInt(txtPort.getText());
 			String ip = txtIpAddress.getText();
@@ -320,9 +317,9 @@ public class Paid_Login extends JFrame implements ActionListener {
 
 			WriteFile(name, ip, port, serverName);
 
-			this.login(name, ip, port, serverName);
+			login(name, ip, port, serverName);
 		}
-		if (e.getSource().equals(this.createServer)) {
+		if (e.getSource().equals(createServer)) {
 			new com.dcmanproductions.vid_eo.server.ServerWindow();
 		}
 	}
@@ -345,11 +342,11 @@ public class Paid_Login extends JFrame implements ActionListener {
 
 	public void readFile() {
 		try {
-			TextTransfer.TextReader("//Server_" + this.txtServerName.getText() + ".txt",
+			TextTransfer.TextReader("//Server_" + txtServerName.getText() + ".txt",
 					"C://Program Files//Vid-Eo_ServerFiles", false);
-			this.txtIpAddress.setText(TextTransfer.rdIp);
-			this.txtPort.setText(TextTransfer.rdPort);
-			this.txtName.setText(TextTransfer.rdName);
+			txtIpAddress.setText(TextTransfer.rdIp);
+			txtPort.setText(TextTransfer.rdPort);
+			txtName.setText(TextTransfer.rdName);
 		} catch (IOException e) {
 			System.out.println("Had an issue with The ReadFile Method");
 			e.printStackTrace();
@@ -361,8 +358,8 @@ public class Paid_Login extends JFrame implements ActionListener {
 		getClass();
 		// Protocol protocol = ;
 		// InitializePortMapper ipm = new
-		// InitializePortMapper(Integer.parseInt(this.txtPort.getText()),
-		// Integer.parseInt(this.txtPort.getText()), protocol);
+		// InitializePortMapper(Integer.parseInt(txtPort.getText()),
+		// Integer.parseInt(txtPort.getText()), protocol);
 		String[] run = { "java", "-jar", "Vid-Eo_Server//PortMapping//portmapper.jar" };
 		try {
 			Runtime.getRuntime().exec(run);
@@ -372,7 +369,7 @@ public class Paid_Login extends JFrame implements ActionListener {
 	}
 
 	private void login(String name, String ip, int port, String serverName) {
-		this.dispose();
+		dispose();
 		new com.dcmanproductions.vid_eo.ClientWindow(name, ip, port, serverName);
 	}
 

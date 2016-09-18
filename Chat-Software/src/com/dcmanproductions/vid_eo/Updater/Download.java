@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
+@SuppressWarnings("all")
 public class Download extends JFrame
 {
   private Thread worker;

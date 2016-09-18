@@ -2,7 +2,7 @@ package com.dcmanproductions.vid_eo.mapper;
 
 import org.chris.portmapper.model.Protocol;
 import org.chris.portmapper.model.SinglePortMapping;
-
+@SuppressWarnings("all")
 public class InitializePortMapper extends SinglePortMapping{
 	int exPort, inPort;
 	Protocol protocol;

@@ -1,14 +1,6 @@
-/*
- * Decompiled with CFR 0_110.
- */
 package com.dcmanproductions.vid_eo.server;
 
-import com.dcmanproductions.vid_eo.ClientWindow;
-import com.dcmanproductions.vid_eo.server.ServerClient;
-import com.dcmanproductions.vid_eo.server.UniqueIdentifier;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -17,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.dcmanproductions.vid_eo.ClientWindow;
+@SuppressWarnings("all")
 public class Server
 implements Runnable {
     private List<ServerClient> clients = new ArrayList<ServerClient>();

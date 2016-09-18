@@ -6,7 +6,7 @@ package com.dcmanproductions.vid_eo.server;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+@SuppressWarnings("all")
 public class UniqueIdentifier {
     private static List<Integer> ids = new ArrayList<Integer>();
     private static final int RANGE = 10000;

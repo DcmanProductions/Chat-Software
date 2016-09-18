@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-
+@SuppressWarnings("all")
 public class ServerWindow extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1;
     public JButton start;
