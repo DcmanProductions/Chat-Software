@@ -22,7 +22,7 @@ import com.dcmanproductions.vid_eo.TransferInfo.TextTransfer;
 import com.dcmanproductions.vid_eo.Updater.Download;
 
 @SuppressWarnings("all")
-public class Paid_Login extends JFrame implements ActionListener {
+public class Login extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1;
 	private String title = "Vid-Eo | Login";
 	private String Name;
@@ -33,7 +33,7 @@ public class Paid_Login extends JFrame implements ActionListener {
 	private JLabel lblServerName;
 	private JLabel lblCopyright;
 	private JLabel lblError;
-	private JButton login;
+	private JButton btLogin;
 	private JButton createServer;
 	private JButton update;
 	private JButton mapper;
@@ -48,7 +48,7 @@ public class Paid_Login extends JFrame implements ActionListener {
 	public static JCheckBox cbAdmin;
 	public static boolean isAdmin;
 
-	public Paid_Login() {
+	public Login() {
 
 		System.out.println("Starting Login Application...\nCreating GUI...");
 
@@ -65,9 +65,16 @@ public class Paid_Login extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		contentPane.setBackground(Color.DARK_GRAY);
 		update(getGraphics());
-		init();
+		start();
 	}
 
+	public void start(){
+		init();
+	}
+	public void stop(){
+		
+	}
+	
 	private void init() {
 
 		lblName = new JLabel("Please Enter a Username");
@@ -91,13 +98,13 @@ public class Paid_Login extends JFrame implements ActionListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
-					String name = Paid_Login.txtName.getText();
-					int port = Integer.parseInt(Paid_Login.txtPort.getText());
-					String ip = Paid_Login.txtIpAddress.getText();
-					String serverName = Paid_Login.txtServerName.getText();
+					String name = Login.txtName.getText();
+					int port = Integer.parseInt(Login.txtPort.getText());
+					String ip = Login.txtIpAddress.getText();
+					String serverName = Login.txtServerName.getText();
 
 					WriteFile(name, ip, port, serverName);
-					Paid_Login.this.login(name, ip, port, serverName);
+					Login.this.login(name, ip, port, serverName);
 				}
 			}
 		});
@@ -124,14 +131,14 @@ public class Paid_Login extends JFrame implements ActionListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
-					String name = Paid_Login.txtName.getText();
-					int port = Integer.parseInt(Paid_Login.txtPort.getText());
-					String ip = Paid_Login.txtIpAddress.getText();
-					String serverName = Paid_Login.txtServerName.getText();
+					String name = Login.txtName.getText();
+					int port = Integer.parseInt(Login.txtPort.getText());
+					String ip = Login.txtIpAddress.getText();
+					String serverName = Login.txtServerName.getText();
 
 					WriteFile(name, ip, port, serverName);
 
-					Paid_Login.this.login(name, ip, port, serverName);
+					Login.this.login(name, ip, port, serverName);
 				}
 			}
 		});
@@ -163,14 +170,14 @@ public class Paid_Login extends JFrame implements ActionListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
-					String name = Paid_Login.txtName.getText();
-					int port = Integer.parseInt(Paid_Login.txtPort.getText());
-					String ip = Paid_Login.txtIpAddress.getText();
-					String serverName = Paid_Login.txtServerName.getText();
+					String name = Login.txtName.getText();
+					int port = Integer.parseInt(Login.txtPort.getText());
+					String ip = Login.txtIpAddress.getText();
+					String serverName = Login.txtServerName.getText();
 
 					WriteFile(name, ip, port, serverName);
 
-					Paid_Login.this.login(name, ip, port, serverName);
+					Login.this.login(name, ip, port, serverName);
 				}
 			}
 		});
@@ -195,27 +202,27 @@ public class Paid_Login extends JFrame implements ActionListener {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == 10) {
-					String name = Paid_Login.txtName.getText();
-					int port = Integer.parseInt(Paid_Login.txtPort.getText());
-					String ip = Paid_Login.txtIpAddress.getText();
-					String serverName = Paid_Login.txtServerName.getText();
+					String name = Login.txtName.getText();
+					int port = Integer.parseInt(Login.txtPort.getText());
+					String ip = Login.txtIpAddress.getText();
+					String serverName = Login.txtServerName.getText();
 
 					WriteFile(name, ip, port, serverName);
 
-					Paid_Login.this.login(name, ip, port, serverName);
+					Login.this.login(name, ip, port, serverName);
 				}
 			}
 		});
 
 		contentPane.add(txtPort);
-		login = new JButton("Login");
-		login.setBounds(size.width / 2 - 150 + 12, size.height / 2 + 122 - 30, 100, 15);
-		login.addActionListener(this);
-		login.setForeground(Color.white);
-		login.setBackground(Color.DARK_GRAY);
-		login.setBorderPainted(false);
-		login.setCursor(new Cursor(12));
-		contentPane.add(login);
+		btLogin = new JButton("Login");
+		btLogin.setBounds(size.width / 2 - 150 + 12, size.height / 2 + 122 - 30, 100, 15);
+		btLogin.addActionListener(this);
+		btLogin.setForeground(Color.white);
+		btLogin.setBackground(Color.DARK_GRAY);
+		btLogin.setBorderPainted(false);
+		btLogin.setCursor(new Cursor(12));
+		contentPane.add(btLogin);
 
 		createServer = new JButton("Create a Server");
 		createServer.setBounds(size.width / 2 - 150 + 120, size.height / 2 + 90 + 32 - 30, 150, 15);
@@ -286,7 +293,7 @@ public class Paid_Login extends JFrame implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Paid_Login.this.setVisible(false);
+				Login.this.setVisible(false);
 				ServerList sl = new ServerList();
 				sl.setVisible(true);
 			}
@@ -309,7 +316,7 @@ public class Paid_Login extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(login)) {
+		if (e.getSource().equals(btLogin)) {
 			String name = txtName.getText();
 			int port = Integer.parseInt(txtPort.getText());
 			String ip = txtIpAddress.getText();
@@ -343,7 +350,7 @@ public class Paid_Login extends JFrame implements ActionListener {
 	public void readFile() {
 		try {
 			TextTransfer.TextReader("//Server_" + txtServerName.getText() + ".txt",
-					"C://Program Files//Vid-Eo_ServerFiles", false);
+					"Server-Files", false);
 			txtIpAddress.setText(TextTransfer.rdIp);
 			txtPort.setText(TextTransfer.rdPort);
 			txtName.setText(TextTransfer.rdName);

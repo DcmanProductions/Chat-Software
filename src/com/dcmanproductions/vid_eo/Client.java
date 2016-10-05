@@ -23,6 +23,13 @@ public class Client {
 		this.name = name;
 		this.address = address;
 		this.port = port;
+		try {
+			new com.dcmanproductions.vid_eo.Audio.ClientStream(address);
+		} catch (IOException e) {
+			System.out.println("StartClient ERROR: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
 	}
 
 	public String getName() {

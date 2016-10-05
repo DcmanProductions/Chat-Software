@@ -45,7 +45,7 @@ public class ClientWindow extends JFrame implements Runnable {
 	private JMenuItem mntmCommands;
 	private JMenuItem mntmBack;
 	private OnlineUsers users;
-	private boolean isSending = true;
+	private boolean isSending = true; 
 
 	public ClientWindow(String name, String address, int port, String serverName) {
 		this.setTitle("Vid-Eo | " + serverName + "'s Server");
@@ -104,8 +104,8 @@ public class ClientWindow extends JFrame implements Runnable {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// Paid_Login backLogin = new Paid_Login();
-				new com.dcmanproductions.vid_eo.Paid_Login();
+				// Login backLogin = new Login();
+				new com.dcmanproductions.vid_eo.Login();
 				// backLogin.setVisible(true);
 				ClientWindow.this.setVisible(false);
 			}
@@ -270,7 +270,7 @@ public class ClientWindow extends JFrame implements Runnable {
 	public void runCommands(String cmds) {
 		if (cmds.contains("h") || cmds.contains("help") || cmds.contains("?"))
 			ClientWindow.this
-					.console("----Heres a List of Commands---- " + "\n /quit -- to Quit the server and return to login "
+					.console("----Heres a List of Commands---- " + "\n /quit -- to Quit the server and return to Login "
 							+ "\n/users -- to find out what users are online");
 
 		if (cmds.contains("users") || cmds.contains("list") || cmds.contains("clients"))

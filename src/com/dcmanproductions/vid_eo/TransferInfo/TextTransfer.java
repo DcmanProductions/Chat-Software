@@ -23,6 +23,7 @@ public class TextTransfer {
 	public static String rdPort;
 	public static String rdName;
 	public static String rdServerName;
+	
 
 	public static void TextReader(String FileName, String FileLocation, boolean isNonServerList) throws IOException {
 		System.out.println("Accessing Text Reader Method...");
@@ -92,7 +93,7 @@ public class TextTransfer {
 
 	public static void TextWriter(String FileName, String fileContent, String FolderName) throws IOException {
 		System.out.println("Accessing Text Writer Method...");
-		File f = new File("/Vid-Eo_Server Files/");
+		File f = new File("Server-Files/");
 		try {
 			if (f.mkdir()) {
 				System.out.println("Directory Created in " + f.getAbsolutePath());
@@ -102,7 +103,7 @@ public class TextTransfer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		writer = new PrintWriter("C://Vid-Eo_Server Files//" + FileName, "UTF-8");
+		writer = new PrintWriter("Server-Files/" + FileName, "UTF-8");
 		writer.println(fileContent);
 		writer.close();
 

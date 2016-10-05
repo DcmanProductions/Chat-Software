@@ -67,7 +67,7 @@ public class Download extends JFrame {
 		});
 		this.pan2.add(this.launch);
 
-		this.cancle = new JButton("Cancel Update");
+		this.cancle = new JButton("Cancel Install/Update");
 		this.cancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -81,7 +81,7 @@ public class Download extends JFrame {
 		pack();
 		setSize(500, 400);
 		setLocationRelativeTo(null);
-		setTitle("Updating Vid-Eo");
+		setTitle("Updating/Installing Vid-Eo");
 	}
 
 	private void download() {
@@ -114,13 +114,13 @@ public class Download extends JFrame {
 	}
 
 	private void cleanup() {
-		try {
-			TextTransfer.TextWriter("/currentVersion.txt/", Updater.getLatestVersion(), "/");
-		} catch (IOException e) {
-			System.out.println("Had Troubles in The Clean UP Method [Catch 1].  ERROR: " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("Had Troubles in The Clean UP Method [Catch 2].  ERROR: " + e.getMessage());
-		}
+//		try {
+//			TextTransfer.TextWriter("/currentVersion.txt/", Updater.getLatestVersion(), "/");
+//		} catch (IOException e) {
+//			System.out.println("Had Troubles in The Clean UP Method [Catch 1].  ERROR: " + e.getMessage());
+//		} catch (Exception e) {
+//			System.out.println("Had Troubles in The Clean UP Method [Catch 2].  ERROR: " + e.getMessage());
+//		}
 		this.outText.setText(this.outText.getText() + "\nPreforming clean up...");
 		File f = new File("update.zip");
 		f.delete();

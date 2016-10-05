@@ -3,7 +3,7 @@
  */
 package com.dcmanproductions.vid_eo.server;
 
-import com.dcmanproductions.vid_eo.Paid_Login;
+import com.dcmanproductions.vid_eo.Login;
 import com.dcmanproductions.vid_eo.server.ServerMain;
 import java.awt.Color;
 import java.awt.Component;
@@ -61,10 +61,10 @@ public class ServerWindow extends JFrame implements ActionListener {
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == 10) {
                     ServerWindow.this.dispose();
-                    Paid_Login.txtIpAddress.setText("localhost");
-                    Paid_Login.isAdmin = true;
-                    Paid_Login.cbAdmin.setSelected(true);;
-                    Paid_Login.txtPort.setText(ServerWindow.this.txtPort.getText());
+                    Login.txtIpAddress.setText("localhost");
+                    Login.isAdmin = true;
+                    Login.cbAdmin.setSelected(true);;
+                    Login.txtPort.setText(ServerWindow.this.txtPort.getText());
                     new com.dcmanproductions.vid_eo.server.ServerMain(Integer.parseInt(ServerWindow.this.txtPort.getText()));
                     ServerWindow.this.dispose();
                 }
@@ -88,8 +88,8 @@ public class ServerWindow extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(this.start)) {
             this.dispose();
-            Paid_Login.txtIpAddress.setText("localhost");
-            Paid_Login.txtPort.setText(this.txtPort.getText());
+            Login.txtIpAddress.setText("localhost");
+            Login.txtPort.setText(this.txtPort.getText());
             new com.dcmanproductions.vid_eo.server.ServerMain(Integer.parseInt(this.txtPort.getText()));
             this.dispose();
         }

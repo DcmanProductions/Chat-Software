@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.dcmanproductions.vid_eo.TransferInfo.TextTransfer;
+import com.dcmanproductions.vid_eo.Updater.Download;
 import com.dcmanproductions.vid_eo.Updater.UpdateInfo;
 import com.dcmanproductions.vid_eo.Updater.Updater;
 
@@ -77,7 +78,7 @@ public class ServerList extends JFrame implements ActionListener {
 					try {
 						TextTransfer tt = new TextTransfer();
 						TextTransfer.TextReader("Server_" + ServerList.name.getText() + ".txt",
-								"C://Vid-Eo_Server Files//", false);
+								"C:Server-Files/", false);
 
 						ServerList.serverName = TextTransfer.rdServerName;
 						ServerList.port = TextTransfer.rdPort;
@@ -85,7 +86,7 @@ public class ServerList extends JFrame implements ActionListener {
 						ServerList.ip = TextTransfer.rdIp;
 
 						ServerList.this.setVisible(false);
-						new Paid_Login();
+						new Login();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -112,7 +113,7 @@ public class ServerList extends JFrame implements ActionListener {
 	        TextTransfer tt = new TextTransfer();
 	        try
 	        {
-	          TextTransfer.TextReader("Server_" + ServerList.name.getText() + ".txt", "C://Vid-Eo_Server Files//", false);
+	          TextTransfer.TextReader("Server_" + ServerList.name.getText() + ".txt", "C:Server-Files/", false);
 	          
 	          ServerList.serverName = TextTransfer.rdServerName;
 	          ServerList.port = TextTransfer.rdPort;
@@ -124,7 +125,7 @@ public class ServerList extends JFrame implements ActionListener {
 	        System.out.println("One of Two things has happened"+"\n(1)You haven't entered anything into the 'Server Name' TextField"+"\n(2)An Issue has ");
 	        }
 	        ServerList.this.setVisible(false);
-	        new Paid_Login();
+	        new Login();
 	      }
 	    });
 		contentPane.add(create);
@@ -147,10 +148,14 @@ public class ServerList extends JFrame implements ActionListener {
 
 	public static void main(String[] args) {
 		try {
-			TextTransfer.TextReader("/currentVersion.txt/", "/", true);
-            if (Integer.parseInt(Updater.getLatestVersion()) > Integer.parseInt(TextTransfer.text)) {
-                new UpdateInfo(Updater.getWhatsNew());
-            }
+//			TextTransfer.TextWriter("currentVersion.txt", "1", "Server-Files/");
+			TextTransfer.TextReader("currentVersion.txt/", "Server-Files/", true);
+			if(TextTransfer.text == "1"){
+				System.out.println("Current Version is 1");
+			}
+//            if (Integer.parseInt(Updater.getLatestVersion()) > Integer.parseInt(TextTransfer.text)) {
+//                new UpdateInfo(Updater.getWhatsNew());
+//            
         } catch (Exception ex) {
         	System.out.println("Had Issues with the Version Verification. ERROR: "+ex.getMessage());
         }
@@ -161,7 +166,7 @@ public class ServerList extends JFrame implements ActionListener {
 		if (e.getSource().equals(useLast)) {
 			TextTransfer tt = new TextTransfer();
 			try {
-				TextTransfer.TextReader("Server_LastUsed.txt", "C://Vid-Eo_Server Files//", false);
+				TextTransfer.TextReader("Server_LastUsed.txt", "Server-Files/", false);
 
 				serverName = TextTransfer.rdServerName;
 				port = TextTransfer.rdPort;
@@ -170,7 +175,7 @@ public class ServerList extends JFrame implements ActionListener {
 
 				System.out.println("Found File Server_LastUsed");
 				setVisible(false);
-				new Paid_Login();
+				new Login();
 			} catch (IOException er) {
 				System.out.println("Had Issues Reading the 'Last Used' Server File");
 				error.setText("Sorry Had Issues Reading the 'Last Used' Server File");

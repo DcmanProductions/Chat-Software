@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 
+@SuppressWarnings("all")
 public class UpdateInfo extends JFrame{
 
     private JEditorPane infoPane;
