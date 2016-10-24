@@ -80,6 +80,7 @@ public class Download extends JFrame {
 		add(this.pan1);
 		pack();
 		setSize(500, 400);
+		setVisible(true);
 		setLocationRelativeTo(null);
 		setTitle("Updating/Installing Vid-Eo");
 	}

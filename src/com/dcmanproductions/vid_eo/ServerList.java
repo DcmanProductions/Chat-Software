@@ -113,7 +113,7 @@ public class ServerList extends JFrame implements ActionListener {
 	        TextTransfer tt = new TextTransfer();
 	        try
 	        {
-	          TextTransfer.TextReader("Server_" + ServerList.name.getText() + ".txt", "C:Server-Files/", false);
+	          TextTransfer.TextReader("Server_" + ServerList.name.getText() + ".txt", "Server-Files/", false);
 	          
 	          ServerList.serverName = TextTransfer.rdServerName;
 	          ServerList.port = TextTransfer.rdPort;
@@ -149,8 +149,8 @@ public class ServerList extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		try {
 //			TextTransfer.TextWriter("currentVersion.txt", "1", "Server-Files/");
-			TextTransfer.TextReader("currentVersion.txt/", "Server-Files/", true);
-			if(TextTransfer.text == "1"){
+//			TextTransfer.TextReader("currentVersion.txt/", "Server-Files/", true);
+			if(TextTransfer.reader.readLine() == "1"){
 				System.out.println("Current Version is 1");
 			}
 //            if (Integer.parseInt(Updater.getLatestVersion()) > Integer.parseInt(TextTransfer.text)) {
