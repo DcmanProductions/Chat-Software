@@ -1,12 +1,15 @@
 package com.dcmanproductions.vid_eo.TransferInfo;
 
-import java.awt.Color;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 @SuppressWarnings("all")
@@ -14,16 +17,16 @@ public class TextTransfer {
 	public static String FileName, fileContent;
 	public static File objFile;
 	public static PrintWriter writer;
+	public static BufferedWriter bw;
 	public static BufferedReader reader;
 	public static String serverName;
-	
+
 	public static String text;
 
 	public static String rdIp;
 	public static String rdPort;
 	public static String rdName;
 	public static String rdServerName;
-	
 
 	public static void TextReader(String FileName, String FileLocation, boolean isNonServerList) throws IOException {
 		System.out.println("Accessing Text Reader Method...");
@@ -70,14 +73,14 @@ public class TextTransfer {
 						"Had A Problem with the while loop in the TextReader Method\n Couldn't proccess line reader");
 				e.printStackTrace();
 			}
-		}else{
+		} else {
 			try {
 				TextTransfer.text = "";
 				String text = TextTransfer.text;
 
 				String line = reader.readLine();
 				while (line != null) {
-					System.out.println("Line:"+line+" Text"+text);
+					System.out.println("Line:" + line + " Text" + text);
 					text += line;
 					line = reader.readLine();
 
@@ -93,7 +96,22 @@ public class TextTransfer {
 
 	public static void TextWriter(String FileName, String fileContent, String FolderName) throws IOException {
 		System.out.println("Accessing Text Writer Method...");
-		File f = new File("Server-Files/");
+		File f = new File(FolderName);
+		try {
+			bw = new BufferedWriter(new FileWriter(FolderName + FileName, true));
+			bw.write(fileContent);
+			bw.newLine();
+			bw.flush();
+		} catch (IOException e) {
+			System.out.println("Had an issue with Appending file " + FileName + " in TextWriter Meathod.  ERROR: "
+					+ e.getMessage());
+			e.printStackTrace();
+		} finally {
+			if (bw != null) {
+				bw.close();
+			}
+		}
+
 		try {
 			if (f.mkdir()) {
 				System.out.println("Directory Created in " + f.getAbsolutePath());
@@ -103,9 +121,33 @@ public class TextTransfer {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		writer = new PrintWriter("Server-Files/" + FileName, "UTF-8");
-		writer.println(fileContent);
-		writer.close();
+//		writer = new PrintWriter("Server-Files/" + FileName, "UTF-8");
+//		writer.println(fileContent);
+//		writer.close();
+
+	}
+
+	public static void Append(String fileName) {
+		try {
+			bw = new BufferedWriter(new FileWriter("//Server-Files//" + fileName, true));
+		} catch (IOException e) {
+			System.out.println("Had an issue in the Append Meathod.  ERROR: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	public static void serverList(String path, String fileName) {
+		Scanner s;
+		try {
+			s = new Scanner(new File(path+"//"+fileName+".txt"));
+			ArrayList<String> list = new ArrayList<String>();
+			while (s.hasNext()) {
+				list.add(s.next());
+			}
+			s.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 	}
 
